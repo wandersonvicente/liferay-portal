@@ -74,3 +74,14 @@ app.artifacts-1.0.6=\
 app.change.log-1.0.6=LPS-146089
 
 app.git.id-1.0.6=023edade3de999def30e44b869af659c9c166339
+
+#
+# Liferay App Version 1.0.7
+#
+
+app.artifacts-1.0.7=\
+	
+
+app.change.log-1.0.7=LPS-146089
+
+app.git.id-1.0.7=de6bfaa42a8da29e686bd284d7740b5168a307d0
