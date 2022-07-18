@@ -89,6 +89,12 @@ const SideMenu = () => {
 					{i18n.translate(getKebabCase(MENU_TYPES.overview))}
 				</MenuItem>
 
+				<MenuItem to="">
+					{i18n.translate(
+						getKebabCase(MENU_TYPES.liferayExperienceCloud)
+					)}
+				</MenuItem>
+
 				<li>
 					<Button
 						appendIcon={
