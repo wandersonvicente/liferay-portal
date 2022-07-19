@@ -35,6 +35,15 @@ const ProjectRoutes = () => (
 			<Route element={<Layout />} path="/:accountKey">
 				<Route element={<Overview />} index />
 
+				<Route
+					element={
+						<ProductOutlet
+							product={PRODUCT_TYPES.liferayExperienceCloud}
+						/>
+					}
+					path={getKebabCase(PRODUCT_TYPES.liferayExperienceCloud)}
+				></Route>
+
 				<Route element={<ActivationOutlet />} path="activation">
 					<Route
 						element={
