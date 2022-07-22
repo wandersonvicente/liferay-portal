@@ -45,9 +45,9 @@ const ProjectRoutes = () => (
 				>
 					<Route
 						element={<LiferayExperienceCloud />}
-						path={`activation/${getKebabCase(
+						path={getKebabCase(
 							PRODUCT_TYPES.liferayExperienceCloud
-						)}`}
+						)}
 					/>
 				</Route>
 

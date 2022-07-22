@@ -98,9 +98,7 @@ const SideMenu = () => {
 				</MenuItem>
 
 				<MenuItem
-					to={`activation/${getKebabCase(
-						PRODUCT_TYPES.liferayExperienceCloud
-					)}`}
+					to={getKebabCase(PRODUCT_TYPES.liferayExperienceCloud)}
 				>
 					{PRODUCT_TYPES.liferayExperienceCloud}
 				</MenuItem>
