@@ -1,8 +1,8 @@
 {
 	"label": {
-		"en-US": "Incident Management Contact Liferay Experience Cloud"
+		"en-US": "Admin Liferay Experience Cloud"
 	},
-	"name": "IncidentManagementContactLiferayExperienceCloud",
+	"name": "AdminLiferayExperienceCloud",
 	"objectFields": [
 		{
 			"DBType": "String",
@@ -29,6 +29,16 @@
 			"indexed": true,
 			"indexedAsKeyword": false,
 			"label": {
+				"en-US": "Github Username"
+			},
+			"name": "githubUsername",
+			"required": true
+		},
+		{
+			"DBType": "String",
+			"indexed": true,
+			"indexedAsKeyword": false,
+			"label": {
 				"en-US": "Email Address"
 			},
 			"name": "emailAddress",
@@ -46,7 +56,7 @@
 		}
 	],
 	"pluralLabel": {
-		"en_US": "Incident Management Contacts Liferay Experience Cloud"
+		"en_US": "Admins Liferay Experience Cloud"
 	},
 	"scope": "site",
 	"system": false
