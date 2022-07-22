@@ -9,14 +9,14 @@
  * distribution rights of the Software.
  */
 
+import LXCactivationStatus from '../../pages/Project/LiferayExperienceCloud/components/ LXCactivationStatus';
 import AnalyticsCloud from './AnalyticsCloud';
 import DXPCloud from './DXPCloud';
-import LiferayExperienceCloud from './LiferayExperienceCloud';
 
 const ActivationStatus = {
 	AnalyticsCloud,
 	DXPCloud,
-	LiferayExperienceCloud,
+	LXCactivationStatus,
 };
 
 export default ActivationStatus;
