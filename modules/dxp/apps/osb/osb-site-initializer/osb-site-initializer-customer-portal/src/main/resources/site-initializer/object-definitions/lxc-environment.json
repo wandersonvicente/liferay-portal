@@ -21,7 +21,7 @@
 			"label": {
 				"en-US": "Primary Region"
 			},
-			"name": "{PrimaryRegion",
+			"name": "primaryRegion",
 			"required": true
 		},
 		{

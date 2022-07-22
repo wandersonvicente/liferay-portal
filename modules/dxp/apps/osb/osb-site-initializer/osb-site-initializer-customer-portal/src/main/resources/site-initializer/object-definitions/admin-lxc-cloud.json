@@ -51,7 +51,7 @@
 			"label": {
 				"en-US": "Liferay Experience Cloud Environment"
 			},
-			"name": "LiferayExperienceCloudEnvironmentId",
+			"name": "liferayExperienceCloudEnvironmentId",
 			"required": true
 		}
 	],
