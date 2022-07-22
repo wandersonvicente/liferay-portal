@@ -9,17 +9,4 @@
  * distribution rights of the Software.
  */
 
-import React from 'react';
-import ActivationStatusLayout from '../Layout';
-
-const SetupLiferayExperienceCloud = () => {
-	return (
-		<div>
-			<div>Liferay Experience Cloud Activation</div>
-
-			<ActivationStatusLayout />
-		</div>
-	);
-};
-
-export default SetupLiferayExperienceCloud;
+export {default} from './ LXCactivationStatus';

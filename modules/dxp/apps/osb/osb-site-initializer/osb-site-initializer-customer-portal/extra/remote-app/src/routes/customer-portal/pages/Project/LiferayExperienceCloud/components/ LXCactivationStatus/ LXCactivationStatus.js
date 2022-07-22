@@ -9,4 +9,17 @@
  * distribution rights of the Software.
  */
 
-export {default} from './LiferayExperienceCloud';
+import React from 'react';
+import ActivationStatusLayout from '../../../../../components/ActivationStatus/Layout';
+
+const SetupLiferayExperienceCloud = () => {
+	return (
+		<div>
+			<div>Liferay Experience Cloud Activation</div>
+
+			<ActivationStatusLayout />
+		</div>
+	);
+};
+
+export default SetupLiferayExperienceCloud;
