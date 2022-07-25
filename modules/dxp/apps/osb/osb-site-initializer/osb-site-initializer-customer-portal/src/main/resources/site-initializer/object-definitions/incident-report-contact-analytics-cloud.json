@@ -1,29 +1,9 @@
 {
 	"label": {
-		"en-US": "Incident Management Contact Liferay Experience Cloud"
+		"en-US": "Incident Report Contact Analytics Cloud"
 	},
-	"name": "IncidentManagementContactLiferayExperienceCloud",
+	"name": "IncidentReportContactAnalyticsCloud",
 	"objectFields": [
-		{
-			"DBType": "String",
-			"indexed": true,
-			"indexedAsKeyword": false,
-			"label": {
-				"en-US": "First Name"
-			},
-			"name": "firstName",
-			"required": true
-		},
-		{
-			"DBType": "String",
-			"indexed": true,
-			"indexedAsKeyword": false,
-			"label": {
-				"en-US": "Last Name"
-			},
-			"name": "lastName",
-			"required": true
-		},
 		{
 			"DBType": "String",
 			"indexed": true,
@@ -39,14 +19,14 @@
 			"indexed": true,
 			"indexedAsKeyword": false,
 			"label": {
-				"en-US": "Liferay Experience Cloud Environment"
+				"en-US": "Analytics Cloud Workspace"
 			},
-			"name": "LiferayExperienceCloudEnvironmentId",
+			"name": "analyticsCloudWorkspaceId",
 			"required": true
 		}
 	],
 	"pluralLabel": {
-		"en_US": "Incident Management Contacts Liferay Experience Cloud"
+		"en_US": "Incident Report Contacts Analytics Cloud"
 	},
 	"scope": "site",
 	"system": false
