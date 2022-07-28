@@ -9,4 +9,4 @@
  * distribution rights of the Software.
  */
 
-export {default} from './ LXCactivationStatus';
+export {default} from './activationStatusLXC';

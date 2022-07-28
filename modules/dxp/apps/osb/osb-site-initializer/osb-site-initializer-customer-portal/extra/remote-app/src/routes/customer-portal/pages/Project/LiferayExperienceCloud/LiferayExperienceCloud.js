@@ -9,12 +9,47 @@
  * distribution rights of the Software.
  */
 
-// import SetupLiferayExperienceCloud from '../../../components/ActivationStatus/LiferayExperienceCloud/LiferayExperienceCloud';
+import {useEffect} from 'react';
+import {useOutletContext} from 'react-router-dom';
+import {Liferay} from '../../../../../common/services/liferay';
+import {useGetLiferayExperienceCloudEnvironments} from '../../../../../common/services/liferay/graphql/liferay-experience-cloud-environments/queries/useGetLiferayExperienceCloudEnvironments';
+import ActivationStatusLayout from '../../../components/ActivationStatus/Layout';
+
+import {useCustomerPortal} from '../../../context';
+import {PRODUCT_TYPES} from '../../../utils/constants';
 
 const LiferayExperienceCloud = () => {
+	const {setHasQuickLinksPanel, setHasSideMenu} = useOutletContext();
+	const [{project, subscriptionGroups}] = useCustomerPortal();
+
+	useEffect(() => {
+		setHasQuickLinksPanel(true);
+		setHasSideMenu(true);
+	}, [setHasSideMenu, setHasQuickLinksPanel]);
+
+	const {data} = useGetLiferayExperienceCloudEnvironments(
+		Liferay.ThemeDisplay.getScopeGroupId(),
+		{
+			filter: `accountKey eq '${project.accountKey}'`,
+		}
+	);
+
+	const lxcEnvironment = data.c?.liferayExperienceCloudEnvironments?.items[0];
+
+	const subscriptionGroupLXC = subscriptionGroups.find(
+		(subscriptionGroup) =>
+			subscriptionGroup.name === PRODUCT_TYPES.liferayExperienceCloud
+	);
+
 	return (
 		<div className="mr-4">
-			<h1>Estou em Product/LiferayExperienceCloud</h1>
+			<ActivationStatusLayout
+				activationStatus="current"
+				actvationStatusDate="12313251"
+				lxcEnvironment={lxcEnvironment}
+				project={project}
+				subscriptionGroupLXC={subscriptionGroupLXC}
+			/>
 		</div>
 	);
 };

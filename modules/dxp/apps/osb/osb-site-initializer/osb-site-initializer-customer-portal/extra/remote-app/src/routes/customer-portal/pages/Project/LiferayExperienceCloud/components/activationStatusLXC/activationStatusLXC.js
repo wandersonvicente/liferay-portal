@@ -10,16 +10,14 @@
  */
 
 import React from 'react';
-import ActivationStatusLayout from '../../../../../components/ActivationStatus/Layout';
+import LiferayExperienceCloud from '../../LiferayExperienceCloud';
 
-const SetupLiferayExperienceCloud = () => {
+const activationStatusLXC = () => {
 	return (
 		<div>
-			<div>Liferay Experience Cloud Activation</div>
-
-			<ActivationStatusLayout />
+			<LiferayExperienceCloud />
 		</div>
 	);
 };
 
-export default SetupLiferayExperienceCloud;
+export default activationStatusLXC;
