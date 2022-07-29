@@ -9,7 +9,7 @@
  * distribution rights of the Software.
  */
 
-import activationStatusLXC from '../../pages/Project/LiferayExperienceCloud/components/activationStatusLXC';
+import activationStatusLXC from '../../pages/Project/LiferayExperienceCloud/components/ActivationStatusLXC';
 import AnalyticsCloud from './AnalyticsCloud';
 import DXPCloud from './DXPCloud';
 
