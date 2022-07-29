@@ -13,14 +13,14 @@ import {useEffect} from 'react';
 import {useOutletContext} from 'react-router-dom';
 import {Liferay} from '../../../../../common/services/liferay';
 import {useGetLiferayExperienceCloudEnvironments} from '../../../../../common/services/liferay/graphql/liferay-experience-cloud-environments/queries/useGetLiferayExperienceCloudEnvironments';
-import ActivationStatusLayout from '../../../components/ActivationStatus/Layout';
+import ActivationStatus from '../../../components/ActivationStatus';
 
 import {useCustomerPortal} from '../../../context';
 import {PRODUCT_TYPES} from '../../../utils/constants';
 
 const LiferayExperienceCloud = () => {
 	const {setHasQuickLinksPanel, setHasSideMenu} = useOutletContext();
-	const [{project, subscriptionGroups}] = useCustomerPortal();
+	const [{project, subscriptionGroups, userAccount}] = useCustomerPortal();
 
 	useEffect(() => {
 		setHasQuickLinksPanel(true);
@@ -43,12 +43,11 @@ const LiferayExperienceCloud = () => {
 
 	return (
 		<div className="mr-4">
-			<ActivationStatusLayout
-				activationStatus="current"
-				actvationStatusDate="12313251"
+			<ActivationStatus.ActivationStatusLXC
 				lxcEnvironment={lxcEnvironment}
 				project={project}
 				subscriptionGroupLXC={subscriptionGroupLXC}
+				userAccount={userAccount}
 			/>
 		</div>
 	);
