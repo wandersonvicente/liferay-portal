@@ -12,7 +12,8 @@
 			"region": "United States",
 			"slaCurrent": "Platinum Subscription",
 			"slaCurrentEndDate": "2022-08-24 00:00:00.0",
-			"slaCurrentStartDate": "2021-08-24 00:00:00.0"
+			"slaCurrentStartDate": "2021-08-24 00:00:00.0",
+			"externalReferenceCode": "ERC-012"
 		},
 		{
 			"accountKey": "ERC-013",
@@ -26,7 +27,8 @@
 			"region": "United States",
 			"slaCurrent": "Gold Subscription",
 			"slaCurrentEndDate": "2022-08-24 00:00:00.0",
-			"slaCurrentStartDate": "2021-08-24 00:00:00.0"
+			"slaCurrentStartDate": "2021-08-24 00:00:00.0",
+			"externalReferenceCode": "ERC-013"
 		},
 		{
 			"accountKey": "ERC-014",
@@ -40,7 +42,8 @@
 			"region": "United States",
 			"slaCurrent": "Gold Subscription",
 			"slaCurrentEndDate": "2022-08-24 00:00:00.0",
-			"slaCurrentStartDate": "2021-08-24 00:00:00.0"
+			"slaCurrentStartDate": "2021-08-24 00:00:00.0",
+			"externalReferenceCode": "ERC-014"
 		},
 		{
 			"accountKey": "ERC-015",
@@ -54,7 +57,8 @@
 			"region": "United States",
 			"slaCurrent": "Gold Subscription",
 			"slaCurrentEndDate": "2022-08-24 00:00:00.0",
-			"slaCurrentStartDate": "2021-08-24 00:00:00.0"
+			"slaCurrentStartDate": "2021-08-24 00:00:00.0",
+			"externalReferenceCode": "ERC-015"
 		},
 		{
 			"accountKey": "ERC-016",
@@ -68,7 +72,8 @@
 			"region": "United States",
 			"slaCurrent": "Gold Subscription",
 			"slaCurrentEndDate": "2022-08-24 00:00:00.0",
-			"slaCurrentStartDate": "2021-08-24 00:00:00.0"
+			"slaCurrentStartDate": "2021-08-24 00:00:00.0",
+			"externalReferenceCode": "ERC-016"
 		}
 	],
 	"objectDefinitionName": "KoroneikiAccount"

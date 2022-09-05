@@ -11,11 +11,13 @@
 
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import {BatchHttpLink} from '@apollo/client/link/batch-http';
+import {RestLink} from 'apollo-link-rest';
 import {SessionStorageWrapper, persistCache} from 'apollo3-cache-persist';
 import {useEffect, useState} from 'react';
 import {createNetworkStatusNotifier} from 'react-apollo-network-status';
 import {Liferay} from '../../services/liferay';
 import {liferayTypePolicies} from '../../services/liferay/graphql/typePolicies';
+import {OPERATION_TYPES} from '../../utils/constants';
 import {networkIndicator} from './networkIndicator';
 
 const LiferayURI = `${Liferay.ThemeDisplay.getPortalURL()}/o`;
@@ -29,9 +31,7 @@ export default function useApollo() {
 	useEffect(() => {
 		const init = async () => {
 			const cache = new InMemoryCache({
-				typePolicies: {
-					...liferayTypePolicies,
-				},
+				typePolicies: liferayTypePolicies,
 			});
 
 			await persistCache({
@@ -46,9 +46,22 @@ export default function useApollo() {
 				uri: `${LiferayURI}/graphql`,
 			});
 
+			const restLiferayLink = new RestLink({
+				headers: {
+					'x-csrf-token': Liferay.authToken,
+				},
+				uri: LiferayURI,
+			});
+
 			const apolloClient = new ApolloClient({
 				cache,
-				link: link.concat(batchLink),
+				link: link.split(
+					(operation) =>
+						operation.getContext().type ===
+						OPERATION_TYPES.liferayRest,
+					restLiferayLink,
+					batchLink
+				),
 			});
 
 			setClient(apolloClient);

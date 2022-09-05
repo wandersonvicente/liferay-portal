@@ -9,17 +9,19 @@
  * distribution rights of the Software.
  */
 
-import SupportOverview from './components/SupportOverview/';
 import './app.scss';
-import {useCustomerPortal} from '../../../context';
+// eslint-disable-next-line no-unused-vars
+import useGetCurrentKoroneikiAccount from '../../../../../common/services/liferay/graphql/koroneiki-accounts/queries/useGetCurrentKoroneikiAccount';
 import SubscriptionsOverview from './components/SubscriptionsOverview';
 
 const Overview = () => {
-	const [{project}] = useCustomerPortal();
+	// const {data, loading} = useGetCurrentKoroneikiAccount();
+
+	// eslint-disable-next-line no-console
+	// console.log(data, loading);
 
 	return (
 		<>
-			<SupportOverview koroneikiAccount={project} />
 			<SubscriptionsOverview />
 		</>
 	);

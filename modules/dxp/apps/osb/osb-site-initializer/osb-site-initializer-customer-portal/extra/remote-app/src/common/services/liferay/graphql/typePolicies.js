@@ -9,6 +9,8 @@
  * distribution rights of the Software.
  */
 
+import {accountSubscriptionTypePolicy} from '../../../../routes/customer-portal/pages/Project/Overview/components/SubscriptionsOverview/queries/typePolicy';
+import {accountSubscriptionGroupsTypePolicy} from './account-subscription-groups/typePolicy';
 import {
 	koroneikiAccountsQueryTypePolicy,
 	koroneikiAccountsTypePolicy,
@@ -18,6 +20,8 @@ import {userAccountsTypePolicy} from './user-accounts/typePolicy';
 export const liferayTypePolicies = {
 	...userAccountsTypePolicy,
 	...koroneikiAccountsTypePolicy,
+	...accountSubscriptionTypePolicy,
+	...accountSubscriptionGroupsTypePolicy,
 	Mutationc: {
 		merge: true,
 	},

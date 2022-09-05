@@ -44,15 +44,17 @@ const GET_ACCOUNT_SUBSCRIPTION_GROUPS = gql`
 
 export function useGetAccountSubscriptionGroups(
 	options = {
+		fetchPolicy: 'cache-and-policy',
 		filter: '',
 		notifyOnNetworkStatusChange: false,
 		page: 1,
 		pageSize: 20,
 		skip: false,
+		sort: '',
 	}
 ) {
 	return useQuery(GET_ACCOUNT_SUBSCRIPTION_GROUPS, {
-		fetchPolicy: 'cache-and-network',
+		fetchPolicy: options.fetchPolicy,
 		nextFetchPolicy: 'cache-first',
 		notifyOnNetworkStatusChange: options.notifyOnNetworkStatusChange,
 		skip: options.skip,
@@ -60,6 +62,7 @@ export function useGetAccountSubscriptionGroups(
 			filter: options.filter || '',
 			page: options.page || 1,
 			pageSize: options.pageSize || 20,
+			sort: options.sort || '',
 		},
 	});
 }

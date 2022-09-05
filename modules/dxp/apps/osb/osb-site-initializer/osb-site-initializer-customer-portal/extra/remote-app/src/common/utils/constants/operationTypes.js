@@ -9,11 +9,6 @@
  * distribution rights of the Software.
  */
 
-export * from './apiBaseUrl';
-export * from './roleTypes';
-export * from './routeTypes';
-export * from './storageKeys';
-export * from './pageRouterTypes';
-export * from './slaTypes';
-export * from './slaStatusTypes';
-export * from './operationTypes';
+export const OPERATION_TYPES = {
+	liferayRest: 'LIFERAY_REST',
+};

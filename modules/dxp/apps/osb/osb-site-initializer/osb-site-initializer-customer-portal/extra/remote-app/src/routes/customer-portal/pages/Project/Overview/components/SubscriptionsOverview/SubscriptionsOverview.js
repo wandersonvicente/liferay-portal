@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -26,173 +27,196 @@ import CardSubscription from './components/CardSubscriptions';
 import SubscriptionsFilterByStatus from './components/SubscriptionsFilterByStatus';
 import SubscriptionsNavbar from './components/SubscriptionsNavbar';
 import '../../app.scss';
+import {useGetAccountSubscriptionGroups} from '../../../../../../../common/services/liferay/graphql/account-subscription-groups/queries/useGetAccountSubscriptionGroups';
+
+import useGetCurrentKoroneikiAccount from '../../../../../../../common/services/liferay/graphql/koroneiki-accounts/queries/useGetCurrentKoroneikiAccount';
+import useGetAccountSubscriptions from './queries/useGetAccountSubscriptions';
 
 const SubscriptionsOverview = () => {
-	const [{project, subscriptionGroups}, dispatch] = useCustomerPortal();
-	const {setHasQuickLinksPanel, setHasSideMenu} = useOutletContext();
-	const {client} = useAppPropertiesContext();
+	// const [{project, subscriptionGroups}, dispatch] = useCustomerPortal();
 
-	const [accountSubscriptions, setAccountSubscriptions] = useState([]);
-	const [selectedSubscriptionGroup, setSelectedSubscriptionGroup] = useState(
-		''
-	);
-	const [selectedStatus, setSelectedStatus] = useState([
-		SUBSCRIPTIONS_STATUS.active,
-		SUBSCRIPTIONS_STATUS.expired,
-		SUBSCRIPTIONS_STATUS.future,
-	]);
+	// const {setHasQuickLinksPanel, setHasSideMenu} = useOutletContext();
+	// const {client} = useAppPropertiesContext();
 
-	const [
-		subscriptionGroupsWithSubscriptions,
-		setSubscriptionGroupsWithSubscriptions,
-	] = useState([]);
+	// const [accountSubscriptions, setAccountSubscriptions] = useState([]);
+	// const [selectedSubscriptionGroup, setSelectedSubscriptionGroup] = useState(
+	// 	''
+	// );
+	// const [selectedStatus, setSelectedStatus] = useState([
+	// 	SUBSCRIPTIONS_STATUS.active,
+	// 	SUBSCRIPTIONS_STATUS.expired,
+	// 	SUBSCRIPTIONS_STATUS.future,
+	// ]);
 
-	const parseAccountSubscriptionGroupERC = (subscriptionName) => {
-		return subscriptionName.toLowerCase().replaceAll(' ', '-');
-	};
+	// const [
+	// 	subscriptionGroupsWithSubscriptions,
+	// 	setSubscriptionGroupsWithSubscriptions,
+	// ] = useState([]);
 
-	const subscriptionsCards = accountSubscriptions.filter(
-		(subscription) =>
-			subscription.accountSubscriptionGroupERC.replace(
-				`${project?.accountKey}_`,
-				''
-			) === parseAccountSubscriptionGroupERC(selectedSubscriptionGroup) &&
-			selectedStatus.includes(subscription.subscriptionStatus)
-	);
+	// const parseAccountSubscriptionGroupERC = (subscriptionName) => {
+	// 	return subscriptionName.toLowerCase().replaceAll(' ', '-');
+	// };
 
-	useEffect(() => {
-		setHasQuickLinksPanel(true);
-		setHasSideMenu(true);
-	}, [setHasSideMenu, setHasQuickLinksPanel]);
+	const {
+		data: currentKoroneikiAccountData,
+		loading: currentKoroneikiAccountLoading,
+	} = useGetCurrentKoroneikiAccount();
 
-	useEffect(() => {
-		const getAllSubscriptions = async (accountKey) => {
-			const {data: dataAccountSubscriptions} = await client.query({
-				fetchPolicy: 'network-only',
-				query: getAccountSubscriptions,
-				variables: {
-					filter: `accountKey eq '${accountKey}'`,
-				},
-			});
+	const {
+		data: accountSubscriptionGroupsData,
+	} = useGetAccountSubscriptionGroups({
+		skip: currentKoroneikiAccountLoading,
+		sort: 'tabOrder:asc',
+	});
+	const {activationStatus} = useGetAccountSubscriptionGroups();
 
-			if (dataAccountSubscriptions) {
-				const dataAllSubscriptions =
-					dataAccountSubscriptions?.c?.accountSubscriptions?.items;
+	// const subscriptionsCards = accountSubscriptions.filter(
+	// 	(subscription) =>
+	// 		subscription.accountSubscriptionGroupERC.replace(
+	// 			`${project?.accountKey}_`,
+	// 			''
+	// 		) === parseAccountSubscriptionGroupERC(selectedSubscriptionGroup) &&
+	// 		selectedStatus.includes(subscription.subscriptionStatus)
+	// );
 
-				const accountSubscriptionGroups = subscriptionGroups.filter(
-					(subscriptionGroup) =>
-						dataAllSubscriptions.some(
-							(subscription) =>
-								subscription.accountSubscriptionGroupERC.replace(
-									`${accountKey}_`,
-									''
-								) ===
-								parseAccountSubscriptionGroupERC(
-									subscriptionGroup.name
-								)
-						)
-				);
+	// useEffect(() => {
+	// 	setHasQuickLinksPanel(true);
+	// 	setHasSideMenu(true);
+	// }, [setHasSideMenu, setHasQuickLinksPanel]);
 
-				setAccountSubscriptions(dataAllSubscriptions);
+	const {accountKey} = useGetCurrentKoroneikiAccount();
 
-				setSubscriptionGroupsWithSubscriptions(
-					accountSubscriptionGroups.sort(
-						(
-							previousAccountSubscriptionGroup,
-							nextAccountSubscriptionGroup
-						) =>
-							previousAccountSubscriptionGroup?.tabOrder -
-							nextAccountSubscriptionGroup?.tabOrder
-					)
-				);
-			}
-		};
+	const {data: dataAccountSubscriptions} = useGetAccountSubscriptions();
 
-		if (subscriptionGroups && project) {
-			getAllSubscriptions(project.accountKey);
-		}
-	}, [client, project, subscriptionGroups]);
+	const test = dataAccountSubscriptions?.c?.accountSubscriptions.items;
 
-	useEffect(() => {
-		if (project && subscriptionGroups) {
-			dispatch({
-				payload: getWebContents(
-					project.dxpVersion,
-					project.slaCurrent,
-					subscriptionGroups
-				),
-				type: actionTypes.UPDATE_QUICK_LINKS,
-			});
-		}
-	}, [dispatch, project, subscriptionGroups]);
+	// eslint-disable-next-line no-console
+	console.log(test);
 
-	const isPartnership =
-		selectedSubscriptionGroup === PRODUCT_TYPES.partnership ||
-		(subscriptionGroups &&
-			subscriptionGroups[0]?.name === PRODUCT_TYPES.partnership);
+	// useEffect(() => {
+	// 	const getAllSubscriptions = async (accountKey) => {
+
+	// 		if (dataAccountSubscriptions) {
+	// 			const dataAllSubscriptions =
+	// 				dataAccountSubscriptions?.c?.accountSubscriptions?.items;
+
+	// 			const accountSubscriptionGroups = subscriptionGroups.filter(
+	// 				(subscriptionGroup) =>
+	// 					dataAllSubscriptions.some(
+	// 						(subscription) =>
+	// 							subscription.accountSubscriptionGroupERC.replace(
+	// 								`${accountKey}_`,
+	// 								''
+	// 							) ===
+	// 							parseAccountSubscriptionGroupERC(
+	// 								subscriptionGroup.name
+	// 							)
+	// 					)
+	// 			);
+
+	// 			setAccountSubscriptions(dataAllSubscriptions);
+
+	// 			setSubscriptionGroupsWithSubscriptions(
+	// 				accountSubscriptionGroups.sort(
+	// 					(
+	// 						previousAccountSubscriptionGroup,
+	// 						nextAccountSubscriptionGroup
+	// 					) =>
+	// 						previousAccountSubscriptionGroup?.tabOrder -
+	// 						nextAccountSubscriptionGroup?.tabOrder
+	// 				)
+	// 			);
+	// 		}
+	// 	};
+
+	// 	if (subscriptionGroups && project) {
+	// 		getAllSubscriptions(project.accountKey);
+	// 	}
+	// }, [client, project, subscriptionGroups]);
+
+	// useEffect(() => {
+	// 	if (project && subscriptionGroups) {
+	// 		dispatch({
+	// 			payload: getWebContents(
+	// 				project.dxpVersion,
+	// 				project.slaCurrent,
+	// 				subscriptionGroups
+	// 			),
+	// 			type: actionTypes.UPDATE_QUICK_LINKS,
+	// 		});
+	// 	}
+	// }, [dispatch, project, subscriptionGroups]);
+
+	// const isPartnership =
+	// 	selectedSubscriptionGroup === PRODUCT_TYPES.partnership ||
+	// 	(subscriptionGroups &&
+	// 		subscriptionGroups[0]?.name === PRODUCT_TYPES.partnership);
 
 	return (
-		<>
-			<div className="d-flex flex-column mr-4 mt-6">
-				{!isPartnership && <h3>{i18n.translate('subscriptions')}</h3>}
+		<button>TESTE</button>
 
-				{!!subscriptionGroupsWithSubscriptions.length && (
-					<>
-						<div
-							className={classNames('align-items-center d-flex', {
-								'justify-content-between':
-									subscriptionGroupsWithSubscriptions.length <
-									5,
-								'justify-content-evenly':
-									subscriptionGroupsWithSubscriptions.length >
-									4,
-							})}
-						>
-							<SubscriptionsNavbar
-								selectedSubscriptionGroup={
-									selectedSubscriptionGroup
-								}
-								setSelectedSubscriptionGroup={
-									setSelectedSubscriptionGroup
-								}
-								subscriptionGroups={
-									subscriptionGroupsWithSubscriptions
-								}
-							/>
+		// <div>
+		// 	<div className="d-flex flex-column mr-4 mt-6">
+		// 		{!isPartnership && <h3>{i18n.translate('subscriptions')}</h3>}
 
-							<SubscriptionsFilterByStatus
-								selectedStatus={selectedStatus}
-								setSelectedStatus={setSelectedStatus}
-							/>
-						</div>
+		// 		{!!subscriptionGroupsWithSubscriptions.length && (
+		// 			<>
+		// 				<div
+		// 					className={classNames('align-items-center d-flex', {
+		// 						'justify-content-between':
+		// 							subscriptionGroupsWithSubscriptions.length <
+		// 							5,
+		// 						'justify-content-evenly':
+		// 							subscriptionGroupsWithSubscriptions.length >
+		// 							4,
+		// 					})}
+		// 				>
+		// 					<SubscriptionsNavbar
+		// 						selectedSubscriptionGroup={
+		// 							selectedSubscriptionGroup
+		// 						}
+		// 						setSelectedSubscriptionGroup={
+		// 							setSelectedSubscriptionGroup
+		// 						}
+		// 						subscriptionGroups={
+		// 							subscriptionGroupsWithSubscriptions
+		// 						}
+		// 					/>
 
-						<div className="cp-overview-cards-subscription d-flex flex-wrap mt-4">
-							{subscriptionsCards.length ? (
-								subscriptionsCards.map(
-									(accountSubscription, index) => (
-										<CardSubscription
-											cardSubscriptionData={
-												accountSubscription
-											}
-											key={index}
-											selectedSubscriptionGroup={
-												selectedSubscriptionGroup
-											}
-										/>
-									)
-								)
-							) : (
-								<p className="mx-auto pt-5">
-									{i18n.translate(
-										'no-subscriptions-match-these-criteria'
-									)}
-								</p>
-							)}
-						</div>
-					</>
-				)}
-			</div>
-		</>
+		// 					<SubscriptionsFilterByStatus
+		// 						selectedStatus={selectedStatus}
+		// 						setSelectedStatus={setSelectedStatus}
+		// 					/>
+		// 				</div>
+
+		// 				<div className="cp-overview-cards-subscription d-flex flex-wrap mt-4">
+		// 					{subscriptionsCards.length ? (
+		// 						subscriptionsCards.map(
+		// 							(accountSubscription, index) => (
+		// 								<CardSubscription
+		// 									cardSubscriptionData={
+		// 										accountSubscription
+		// 									}
+		// 									key={index}
+		// 									selectedSubscriptionGroup={
+		// 										selectedSubscriptionGroup
+		// 									}
+		// 								/>
+		// 							)
+		// 						)
+		// 					) : (
+		// 						<p className="mx-auto pt-5">
+		// 							{i18n.translate(
+		// 								'no-subscriptions-match-these-criteria'
+		// 							)}
+		// 						</p>
+		// 					)}
+		// 				</div>
+		// 			</>
+		// 		)}
+		// 	</div>
+		// eslint-disable-next-line lines-around-comment
+		// </div>
 	);
 };
 
