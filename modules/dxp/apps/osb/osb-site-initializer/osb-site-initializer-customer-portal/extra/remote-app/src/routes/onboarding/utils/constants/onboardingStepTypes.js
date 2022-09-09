@@ -10,10 +10,11 @@
  */
 
 export const ONBOARDING_STEP_TYPES = {
-	analyticsCloud: 4,
-	dxpCloud: 2,
+	analyticsCloud: 5,
+	dxpCloud: 3,
 	invites: 1,
-	successAnalyticsCloud: 5,
-	successDxpCloud: 3,
+	liferayExperienceCloud: 2,
+	successAnalyticsCloud: 6,
+	successDxpCloud: 4,
 	welcome: 0,
 };

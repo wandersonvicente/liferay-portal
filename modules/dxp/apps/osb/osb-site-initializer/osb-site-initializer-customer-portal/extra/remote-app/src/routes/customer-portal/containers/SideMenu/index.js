@@ -103,16 +103,13 @@ const SideMenu = () => {
 					{i18n.translate(getKebabCase(MENU_TYPES.overview))}
 				</MenuItem>
 
-				{Liferay.FeatureFlags['LPS-153478'] &&
-					hasLiferayExperienceCloud && (
-						<MenuItem
-							to={getKebabCase(
-								PRODUCT_TYPES.liferayExperienceCloud
-							)}
-						>
-							{MENU_TYPES.liferayExperienceCloud}
-						</MenuItem>
-					)}
+				{hasLiferayExperienceCloud && (
+					<MenuItem
+						to={getKebabCase(PRODUCT_TYPES.liferayExperienceCloud)}
+					>
+						{MENU_TYPES.liferayExperienceCloud}
+					</MenuItem>
+				)}
 
 				<li>
 					<Button
