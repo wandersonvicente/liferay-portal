@@ -15,12 +15,13 @@ import SetupAnalyticsCloudForm from '../../../common/containers/setup-forms/Setu
 import SetupDXPCloudForm from '../../../common/containers/setup-forms/SetupDXPCloudForm';
 import {useAppPropertiesContext} from '../../../common/contexts/AppPropertiesContext';
 import {PAGE_ROUTER_TYPES} from '../../../common/utils/constants';
+import ConfirmationMessageModal from '../../customer-portal/components/ActivationStatus/LiferayExperienceCloud/components/ConfirmationMessageModal';
 import SetupLiferayExperienceCloudForm from '../../customer-portal/components/ActivationStatus/LiferayExperienceCloud/components/SetupLXCModal/components/SetupLXCForm/';
 import {PRODUCT_TYPES} from '../../customer-portal/utils/constants';
 import {useOnboarding} from '../context';
 import {actionTypes} from '../context/reducer';
-import {ONBOARDING_STEP_TYPES} from '../utils/constants';
 
+import {ONBOARDING_STEP_TYPES} from '../utils/constants';
 import SuccessCloud from './SuccessCloud';
 import Welcome from './Welcome';
 
@@ -143,6 +144,14 @@ const Pages = () => {
 					subscriptionGroupLxcId={
 						subscriptionLiferayExperienceCloud?.accountSubscriptionGroupId
 					}
+				/>
+			),
+		},
+		[ONBOARDING_STEP_TYPES.successliferayExperienceCloud]: {
+			Component: (
+				<ConfirmationMessageModal
+					handleChangeForm={() => liferayExperienceCloudPageHandle()}
+					productType={PRODUCT_TYPES.liferayExperienceCloud}
 				/>
 			),
 		},
