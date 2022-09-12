@@ -38,10 +38,13 @@ const Pages = () => {
 		},
 		dispatch,
 	] = useOnboarding();
+
 	const {client} = useAppPropertiesContext();
 
 	const subscriptionDXPCloud = subscriptionGroups?.find(
-		(subscriptionGroup) => subscriptionGroup.name === PRODUCT_TYPES.dxpCloud
+		(subscriptionGroup) =>
+			subscriptionGroup.name.replaceAll(' ', '') ===
+			PRODUCT_TYPES.dxpCloud
 	);
 
 	const subscriptionAnalyticsCloud = subscriptionGroups?.find(
@@ -63,9 +66,7 @@ const Pages = () => {
 				payload: ONBOARDING_STEP_TYPES.liferayExperienceCloud,
 				type: actionTypes.CHANGE_STEP,
 			});
-		}
-
-		if (!subscriptionLiferayExperienceCloud) {
+		} else {
 			if (subscriptionDXPCloud && !dxpCloudActivationSubmittedStatus) {
 				return dispatch({
 					payload: ONBOARDING_STEP_TYPES.dxpCloud,
